@@ -306,10 +306,25 @@
       const label = document.createElement('div');
       label.className = 'label';
       label.textContent = canonical;
-      label.style.left = data.x + 'px';
-      label.style.top = data.y + 'px';
-      mapContainer.appendChild(label);
+      // Get actual displayed size
+const mapImg = document.getElementById("map-img");
+const containerWidth = mapImg.clientWidth;
+const containerHeight = mapImg.clientHeight;
 
+// Base image dimensions (same as in app.py)
+const BASE_WIDTH = 779;
+const BASE_HEIGHT = 599;
+
+// Scale coordinates
+const scaledX = (data.x / BASE_WIDTH) * containerWidth;
+const scaledY = (data.y / BASE_HEIGHT) * containerHeight;
+
+// Place the label correctly
+label.style.left = scaledX + 'px';
+label.style.top = scaledY + 'px';
+mapContainer.appendChild(label);
+
+      
       message.style.color = 'green';
       message.textContent = `✅ Correct! You’ve guessed ${guessed.size} of 37 states.`;
 

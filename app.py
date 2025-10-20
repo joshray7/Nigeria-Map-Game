@@ -30,6 +30,10 @@ MAP_HEIGHT = 599
 def index():
     return render_template("index.html")
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 @app.route("/states")
 def get_states():
     # return states list (converted to web coords) if you want to load all at once
